@@ -27,6 +27,7 @@
 		<config-file parent="/*" target="config.xml">
 			<feature name="QiNiuPlugin">
 				<param name="ios-package" value="CDVQiNiuPlugin" />
+				<!-- <param name="onload" value="true" /> -->
 			</feature>
 		</config-file>
 		<framework src="SystemConfiguration.framework" custom="false" />
