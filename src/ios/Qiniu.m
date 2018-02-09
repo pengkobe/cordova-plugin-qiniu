@@ -48,13 +48,13 @@
         {
             NSLog(@"请求成功");
             CDVPluginResult* pluginResult = nil;
-            pluginResult = [CDVPluginResult info:info key:key resp:resp];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK info:info key:key resp:resp];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
         }
         else{
             NSLog(@"失败");
             CDVPluginResult* pluginResult = nil;
-            pluginResult = [CDVPluginResult info:info key:key resp:resp];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR info:info key:key resp:resp];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
             //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
         }
