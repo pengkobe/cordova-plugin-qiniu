@@ -1,0 +1,30 @@
+{
+  "name": "cordova-plugin-qiniu",
+  "version": "1.0.0",
+  "description": "cordova plugin for qiniu Android and IOS SDK",
+  "cordova": {
+    "id": "cordova-plugin-qiniu",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pengkobe/cordova-plugin-qiniu.git"
+  },
+  "keywords": [
+    "cordova",
+    "qiniu",
+    "upload",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "pengkobe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pengkobe/cordova-plugin-qiniu/issues"
+  },
+  "homepage": "https://github.com/pengkobe/cordova-plugin-qiniu#readme"
+}
