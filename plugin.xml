@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-qiniu" version="1.0.0">
+<plugin
+	xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-qiniu" version="1.0.0">
 	<name>cordova-plugin-qiniu</name>
 	<description>cordova plugin for qiniu Android and IOS SDK</description>
 	<license>MIT</license>
@@ -10,6 +11,9 @@
 	<platform name="android">
 		<config-file target="res/xml/config.xml" parent="/*">
 			<!--functions-->
+			<feature name="QiNiuPlugin">
+				<param name="android-package" value="com.cordova.qiniu.QiNiuPlugin"/>
+			</feature>
 		</config-file>
 		<!-- lib-->
 		<source-file src="src/android/libs/happy-dns-0.2.13" target-dir="libs" framework="true" />
@@ -19,17 +23,19 @@
 		<!--source code -->
 		<source-file src="src/android/java/qiniu.java" target-dir="src/com/cordova/qiniu/"/>
 	</platform>
-  <platform name="ios">
-    <config-file parent="/*" target="config.xml">
-      <!--functions-->
-    </config-file>
-    <framework src="SystemConfiguration.framework" custom="false" />
-    <framework src="Security.framework" custom="false" />
-    <!--source code -->
-    <header-file src="src/ios/Qiniu.h" />
-    <source-file src="src/ios/Qiniu.m" />
-    <!-- lib-->
-  </platform>
+	<platform name="ios">
+		<config-file parent="/*" target="config.xml">
+			<feature name="QiNiuPlugin">
+				<param name="ios-package" value="CDVQiNiuPlugin" />
+			</feature>
+		</config-file>
+		<framework src="SystemConfiguration.framework" custom="false" />
+		<framework src="Security.framework" custom="false" />
+		<!--source code -->
+		<header-file src="src/ios/Qiniu.h" />
+		<source-file src="src/ios/Qiniu.m" />
+		<!-- lib-->
+	</platform>
 </plugin>
 
 
