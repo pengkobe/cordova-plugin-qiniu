@@ -3,7 +3,7 @@
 @interface Qiniu ()
 
 @property (copy, nonatomic)NSString *token;
-@property (copy) NSString* callbackId;
+@property (copy) NSString *callbackId;
 @property (copy) BOOL flag;
 @property (copy) QNConfiguration *config;
 
@@ -15,7 +15,6 @@
 - (void)init:(CDVInvokedUrlCommand)command{
     // 初始化 token
     NSString* token = [command.arguments objectAtIndex:0];
-    self.callbackId = command.callbackId;
     self.token = token;
 
     // 配置自动选择 scope
@@ -27,6 +26,13 @@
         // 是否选择  https  上传
         // builder.useHttps = YES;
     }];
+
+    // 回传状态
+    CDVPluginResult* pluginResult = nil;
+    NSLog(@"your uploadtoken:%@",token);
+    NSString *message = [NSString stringWithFormat:@"Init your token is: %@\n", token];
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 
@@ -38,10 +44,11 @@
 // 简单文件上传
 -(void)simpleUploadFile:(CDVInvokedUrlCommand *)command
 {
+     CDVPluginResult* pluginResult = nil;
+
     // 重用uploadManager。一般地，只需要创建一个uploadManager对象
     NSDictionary* options = [command.arguments objectAtIndex:0];
-    self.callbackId = command.callbackId;
-    NSLog(@"token:%@",self.callbackId);
+    NSLog(@"token:%@",command.callbackId);
 
     // 获取参数
     NSString * token = self.token;
@@ -51,11 +58,10 @@
     // 上传进度更新
     QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithMime:nil progressHandler:^(NSString *key, float percent) {
         NSLog(@"percent == %.2f", percent);
-
+    
         // 回传进度
-        CDVPluginResult* pluginResult = nil;
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK key:key percent:percent];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
                                                                  params:nil
                                                                checkCrc:NO
@@ -69,15 +75,16 @@
         if(info.ok)
         {
             NSLog(@"请求成功");
-            CDVPluginResult* pluginResult = nil;
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK info:info key:key resp:resp];
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+            // 方式1
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary: [info:info key:key resp:resp];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+
         }
         else{
             NSLog(@"失败");
-            CDVPluginResult* pluginResult = nil;
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR info:info key:key resp:resp];
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+            // 方式2
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary: [info:info key:key resp:resp];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
             //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
         }
         NSLog(@"info ===== %@", info);
