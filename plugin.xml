@@ -32,10 +32,13 @@
 		</config-file>
 		<framework src="SystemConfiguration.framework" custom="false" />
 		<framework src="Security.framework" custom="false" />
+		<framework src="libz.dylib"/>
+		<framework src="libresolv.dylib"/>
+		 
 		<!--source code -->
 		<header-file src="src/ios/Qiniu.h" />
 		<source-file src="src/ios/Qiniu.m" />
-		<!-- lib-->
+		<source-file src="src/ios/libs/libQiniuSDK_iOS.a" framework="true" />
 	</platform>
 </plugin>
 
