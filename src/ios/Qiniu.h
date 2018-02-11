@@ -5,12 +5,8 @@
 
 @interface Qiniu : CDVPlugin<QiniuUploadDelegate>
 
-@property (copy, nonatomic)NSString *token;
-@property (copy) NSString* callbackId;
-
 - (void)init:(CDVInvokedUrlCommand*)command
 - (void)cancel:(CDVInvokedUrlCommand*)command
 - (void)simpleUploadFile:(CDVInvokedUrlCommand*)command;
-
 
 @end

@@ -26,28 +26,27 @@ public class QiNiuPlugin extends CordovaPlugin {
 
   private UploadManager uploadManager;
   private CallbackContext callbackContext;
-
   protected String UPLOAD_TOKEN = "";
-
   // 初始化、执行上传
   private volatile boolean isCancelled = false;
+
 
   /**
    * 初始化
    */
   @Override
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-    //指定zone的具体区域 
-    //FixedZone.zone0   华东机房
-    //FixedZone.zone1   华北机房
-    //FixedZone.zone2   华南机房
-    //FixedZone.zoneNa0 北美机房
-    //自动识别上传区域 
-    //AutoZone.autoZone
-    //Configuration config = new Configuration.Builder()
-    //.zone(Zone.autoZone)
-    //.build();
-    //UploadManager uploadManager = new UploadManager(config);
+    // 指定zone的具体区域 
+    // FixedZone.zone0   华东机房
+    // FixedZone.zone1   华北机房
+    // FixedZone.zone2   华南机房
+    // FixedZone.zoneNa0 北美机房
+    // 自动识别上传区域 
+    // AutoZone.autoZone
+    // Configuration config = new Configuration.Builder()
+    // .zone(Zone.autoZone)
+    // .build();
+    // UploadManager uploadManager = new UploadManager(config);
 
     Configuration config = new Configuration.Builder().chunkSize(512 * 1024) // 分片上传时，每片的大小。 默认256K
         .putThreshhold(1024 * 1024) // 启用分片上传阀值。默认512K
@@ -56,15 +55,15 @@ public class QiNiuPlugin extends CordovaPlugin {
         .responseTimeout(60) // 服务器响应超时。默认60秒
         .recorder(recorder) // recorder分片上传时，已上传片记录器。默认null
         .recorder(recorder, keyGen) // keyGen 分片上传时，生成标识符，用于片记录器区分是那个文件的上传记录
-        .zone(FixedZone.zone0) // 设置区域，指定不同区域的上传域名、备用域名、备用IP。
+        .zone(Zone.autoZone) // 自动识别区域
         .build();
     uploadManager = new UploadManager(config);
   }
 
+
   @Override
   public boolean execute(final String action, final JSONArray args, final CallbackContext callbackContext)
       throws JSONException {
-
     this.callbackContext = callbackContext;
     try {
       Method method = this.getClass().getDeclaredMethod(action, JSONArray.class);
@@ -86,11 +85,18 @@ public class QiNiuPlugin extends CordovaPlugin {
     return true;
   }
 
-  void init(JSONArray args) throws JSONException, UnsupportedEncodingException {
-    String uploadToken = args.optJSONObject(0).getString("uploadToken");
+
+  /**
+   * 初始化 token
+   */
+  void init(String uploadToken) throws JSONException, UnsupportedEncodingException {
     this.UPLOAD_TOKEN = uploadToken;
   }
 
+
+  /**
+   * 简单文件上传
+   */
   private simpleUploadFile(JSONArray args) throws JSONException, UnsupportedEncodingException {
         String prefix = args.optJSONObject(0).getString("prefix");
         String data = args.optJSONObject(0).getString("filePath");
@@ -138,12 +144,14 @@ public class QiNiuPlugin extends CordovaPlugin {
       );
   }
 
+
   /**
    * 点击取消按钮，让UpCancellationSignal##isCancelled()方法返回true，以停止上传
   */
   private cancell(JSONArray args) throws JSONException, UnsupportedEncodingException {
     isCancelled = true;
   }
+
 
   // 记录断点 ( TODO )
 
