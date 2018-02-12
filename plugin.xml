@@ -16,10 +16,10 @@
 			</feature>
 		</config-file>
 		<!-- lib-->
-		<source-file src="src/android/libs/happy-dns-0.2.13" target-dir="libs" framework="true" />
-		<source-file src="src/android/libs/okhttp-3.9.1" target-dir="libs" framework="true" />
-		<source-file src="src/android/libs/okio-1.9.0" target-dir="libs" framework="true" />
-		<source-file src="src/android/libs/qiniu-android-sdk-7.3.10" target-dir="libs" framework="true" />
+		<source-file src="src/android/libs/happy-dns-0.2.13.jar" target-dir="libs" framework="true" />
+		<source-file src="src/android/libs/okhttp-3.9.1.jar" target-dir="libs" framework="true" />
+		<source-file src="src/android/libs/okio-1.9.0.jar" target-dir="libs" framework="true" />
+		<source-file src="src/android/libs/qiniu-android-sdk-7.3.10.jar" target-dir="libs" framework="true" />
 		<!--source code -->
 		<source-file src="src/android/java/qiniu.java" target-dir="src/com/cordova/qiniu/"/>
 	</platform>
