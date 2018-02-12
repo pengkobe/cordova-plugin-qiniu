@@ -8,15 +8,33 @@ cordova.define('cordova/plugins/qiniu', function(require, exports, module) {
     successCallback,
     errorCallback
   ) {
-    cordova.exec(successCallback, errorCallback, 'QiNiuPlugin', args);
+    cordova.exec(
+      successCallback,
+      errorCallback,
+      'QiNiuUploadPlugin',
+      'simpleUploadFile',
+      args
+    );
   };
 
   Qiniu.prototype.init = function(uploadToken, successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, 'QiNiuPlugin', uploadToken);
+    cordova.exec(
+      successCallback,
+      errorCallback,
+      'QiNiuUploadPlugin',
+      'init',
+      uploadToken
+    );
   };
 
   Qiniu.prototype.cancell = function(cancell, errorCallback) {
-    cordova.exec(successCallback, errorCallback, 'QiNiuPlugin', cancell);
+    cordova.exec(
+      successCallback,
+      errorCallback,
+      'QiNiuUploadPlugin',
+      'cancell',
+      cancell
+    );
   };
 
   module.exports = Qiniu;

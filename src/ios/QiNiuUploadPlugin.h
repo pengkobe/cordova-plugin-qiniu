@@ -3,7 +3,7 @@
 #import <Cordova/CDV.h>
 #import <QiniuSDK.h>
 
-@interface Qiniu : CDVPlugin<QiniuUploadDelegate>
+@interface QiNiuUploadPlugin : CDVPlugin<QiniuUploadDelegate>
 
 - (void)init:(CDVInvokedUrlCommand*)command
 - (void)cancel:(CDVInvokedUrlCommand*)command

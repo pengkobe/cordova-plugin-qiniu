@@ -5,14 +5,14 @@
 	<description>cordova plugin for qiniu Android and IOS SDK</description>
 	<license>MIT</license>
 	<keywords>cordova,qiniu</keywords>
-	<js-module src="www/qiniu.js" name="qiniu">
-		<clobbers target="qiniu"/>
+	<js-module src="www/QiNiuUploadPlugin.js" name="QiNiuUploadPlugin">
+		<clobbers target="QiNiuUploadPlugin"/>
 	</js-module>
 	<platform name="android">
 		<config-file target="res/xml/config.xml" parent="/*">
 			<!--functions-->
-			<feature name="QiNiuPlugin">
-				<param name="android-package" value="com.cordova.qiniu.QiNiuPlugin"/>
+			<feature name="QiNiuUploadPlugin">
+				<param name="android-package" value="com.cordova.qiniu.QiNiuUploadPlugin"/>
 			</feature>
 		</config-file>
 		<!-- lib-->
@@ -25,8 +25,8 @@
 	</platform>
 	<platform name="ios">
 		<config-file parent="/*" target="config.xml">
-			<feature name="QiNiuPlugin">
-				<param name="ios-package" value="CDVQiNiuPlugin" />
+			<feature name="QiNiuUploadPlugin">
+				<param name="ios-package" value="CDVQiNiuUploadPlugin" />
 				<!-- <param name="onload" value="true" /> -->
 			</feature>
 		</config-file>
@@ -36,8 +36,8 @@
 		<framework src="libresolv.dylib"/>
 		 
 		<!--source code -->
-		<header-file src="src/ios/Qiniu.h" />
-		<source-file src="src/ios/Qiniu.m" />
+		<header-file src="src/ios/QiNiuUploadPlugin.h" />
+		<source-file src="src/ios/QiNiuUploadPlugin.m" />
 		<source-file src="src/ios/libs/libQiniuSDK_iOS.a" framework="true" />
 	</platform>
 </plugin>
