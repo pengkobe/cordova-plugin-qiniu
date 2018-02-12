@@ -21,7 +21,7 @@
 		<source-file src="src/android/libs/okio-1.9.0.jar" target-dir="libs" framework="true" />
 		<source-file src="src/android/libs/qiniu-android-sdk-7.3.10.jar" target-dir="libs" framework="true" />
 		<!--source code -->
-		<source-file src="src/android/java/qiniu.java" target-dir="src/com/cordova/qiniu/"/>
+		<source-file src="src/android/java/QiNiuUploadPlugin.java" target-dir="src/com/cordova/qiniu/"/>
 	</platform>
 	<platform name="ios">
 		<config-file parent="/*" target="config.xml">
