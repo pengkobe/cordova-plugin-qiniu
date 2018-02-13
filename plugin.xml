@@ -58,13 +58,13 @@
 		<header-file src="src/ios/libs/Http/QNUserAgent.h" />
 		<header-file src="src/ios/libs/Recorder/QNFileRecorder.h" />
 		<header-file src="src/ios/libs/Recorder/QNRecorderDelegate.h" />
-		<header-file src="src/ios/libs/Recorder/QNConfiguration.h" />
-		<header-file src="src/ios/libs/Recorder/QNFormUpload.h" />
-		<header-file src="src/ios/libs/Recorder/QNResumeUpload.h" />
-		<header-file src="src/ios/libs/Recorder/QNUploadManager.h" />
-		<header-file src="src/ios/libs/Recorder/QNUploadOption.h" />
-		<header-file src="src/ios/libs/Recorder/QNUploadOption+Private.h" />
-		<header-file src="src/ios/libs/Recorder/QNUpToken.h" />
+		<header-file src="src/ios/libs/Storage/QNConfiguration.h" />
+		<header-file src="src/ios/libs/Storage/QNFormUpload.h" />
+		<header-file src="src/ios/libs/Storage/QNResumeUpload.h" />
+		<header-file src="src/ios/libs/Storage/QNUploadManager.h" />
+		<header-file src="src/ios/libs/Storage/QNUploadOption.h" />
+		<header-file src="src/ios/libs/Storage/QNUploadOption+Private.h" />
+		<header-file src="src/ios/libs/Storage/QNUpToken.h" />
 	</platform>
 </plugin>
 
