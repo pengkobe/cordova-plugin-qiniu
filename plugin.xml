@@ -39,6 +39,38 @@
 		<header-file src="src/ios/QiNiuUploadPlugin.h" />
 		<source-file src="src/ios/QiNiuUploadPlugin.m" />
 		<source-file src="src/ios/libs/libQiniuSDK_iOS.a" framework="true" />
+
+		<header-file src="src/ios/libs/BigData/QNPipeline.h" />
+
+		<header-file src="src/ios/libs/Common/QN_GTM_Base64.h" />
+		<header-file src="src/ios/libs/Common/QNALAssetFile.h" />
+		<header-file src="src/ios/libs/Common/QNAsyncRun.h" />
+		<header-file src="src/ios/libs/Common/QNCrc32.h" />
+		<header-file src="src/ios/libs/Common/QNEtag.h" />
+		<header-file src="src/ios/libs/Common/QNFile.h" />
+		<header-file src="src/ios/libs/Common/QNFileDelegate.h" />
+		<header-file src="src/ios/libs/Common/QNPHAssetFile.h" />
+		<header-file src="src/ios/libs/Common/QNPHAssetResource.h" />
+		<header-file src="src/ios/libs/Common/QNSystem.h" />
+		<header-file src="src/ios/libs/Common/QNUrlSafeBase64.h" />
+		<header-file src="src/ios/libs/Common/QNVersion.h" />
+	
+		<header-file src="src/ios/libs/Http/QNHttpDelegate.h" />
+		<header-file src="src/ios/libs/Http/QNResponseInfo.h" />
+		<header-file src="src/ios/libs/Http/QNSessionManager.h" />
+		<header-file src="src/ios/libs/Http/QNUserAgent.h" />
+
+		<header-file src="src/ios/libs/Recorder/QNFileRecorder.h" />
+		<header-file src="src/ios/libs/Recorder/QNRecorderDelegate.h" />
+
+		<header-file src="src/ios/libs/Recorder/QNConfiguration.h" />
+		<header-file src="src/ios/libs/Recorder/QNFormUpload.h" />
+		<header-file src="src/ios/libs/Recorder/QNResumeUpload.h" />
+		<header-file src="src/ios/libs/Recorder/QNUploadManager.h" />
+		<header-file src="src/ios/libs/Recorder/QNUploadOption.h" />
+		<header-file src="src/ios/libs/Recorder/QNUploadOption+Private.h" />
+		<header-file src="src/ios/libs/Recorder/QNUpToken.h" />
+
 	</platform>
 </plugin>
 
