@@ -45,7 +45,7 @@
 -(void)simpleUploadFile:(CDVInvokedUrlCommand *)command
 {
     __block CDVPluginResult* pluginResult = nil;
-    NSMutableDictionary* result = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableArray* result = [[NSMutableArray alloc] init];
 
     // 重用uploadManager。一般地，只需要创建一个uploadManager对象
     NSDictionary* options = [command.arguments objectAtIndex:0];
@@ -55,13 +55,15 @@
     NSString * token = self.token;
     NSString * key = [options objectForKey:@"name"];
     NSString * filePath = [options objectForKey:@"filePath"];
+    filePath = [filePath stringByReplacingOccurrencesOfString:@"file://" withString:@""];
+    NSLog(@"filePath:%@",filePath);
 
     // 上传进度更新
     QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithMime:nil progressHandler:^(NSString *key, float percent) {
         NSLog(@"percent == %.2f", percent);
         key = key != nil ? key : @"";
-        [result setObject:key forKey:@"key"];
-        [result setObject:[NSNumber numberWithFloat:percent] forKey:@"percent"];
+        [result addObject:key];
+        [result addObject:[NSNumber numberWithFloat:percent]];
         // 回传进度
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary: result];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -83,9 +85,9 @@
             key = key != nil ? key : @"";
             info = info != nil ? info : @"";
             resp = resp != nil ? resp : @"";
-            [result setObject:key forKey:@"key"];
-            [result setObject:info forKey:@"info"];
-            [result setObject:resp forKey:@"resp"];
+            [result addObject:key ];
+            [result addObject:@""];
+            [result addObject:resp];
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary: result];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 
@@ -93,11 +95,12 @@
         else{
             NSLog(@"失败");
             key = key != nil ? key : @"";
+            
             info = info != nil ? info : @"";
             resp = resp != nil ? resp : @"";
-            [result setObject:key forKey:@"key"];
-            [result setObject:info forKey:@"info"];
-            [result setObject:resp forKey:@"resp"];
+            [result addObject:key ];
+            [result addObject:@""];
+            [result addObject:resp];
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary: result];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
             //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
