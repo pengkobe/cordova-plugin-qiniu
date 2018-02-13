@@ -6,7 +6,7 @@
 #import "QNRefresher.h"
 
 
-@interface QiNiuUploadPlugin : CDVPlugin{}
+@interface CDVQiNiuUploadPlugin : CDVPlugin{}
 
 - (void)init:(CDVInvokedUrlCommand*)command;
 - (void)cancel:(CDVInvokedUrlCommand*)command;

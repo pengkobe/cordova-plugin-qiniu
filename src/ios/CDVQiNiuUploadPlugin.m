@@ -1,6 +1,6 @@
-#import "QiNiuUploadPlugin.h"
+#import "CDVQiNiuUploadPlugin.h"
 
-@interface QiNiuUploadPlugin ()
+@interface CDVQiNiuUploadPlugin ()
 
 @property (copy, nonatomic)NSString *token;
 @property (copy) NSString *callbackId;
@@ -9,7 +9,7 @@
 
 @end
 
-@implementation QiNiuUploadPlugin
+@implementation CDVQiNiuUploadPlugin
 
 // 自定义
 - (void)init:(CDVInvokedUrlCommand *)command{

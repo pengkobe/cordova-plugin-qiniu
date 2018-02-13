@@ -71,29 +71,23 @@
 		<header-file src="src/ios/libs/HappyDNS/QNRefresher.h" />
 		<header-file src="src/ios/libs/HappyDNS/Assessment/QNAssessment.h" />
 		<header-file src="src/ios/libs/HappyDNS/Assessment/QNIpModel.h" />
-
 		<header-file src="src/ios/libs/HappyDNS/Common/QNDnsManager.h" />
 		<header-file src="src/ios/libs/HappyDNS/Common/QNDomain.h" />
 		<header-file src="src/ios/libs/HappyDNS/Common/QNLruCache.h" />
 		<header-file src="src/ios/libs/HappyDNS/Common/QNNetworkInfo.h" />
 		<header-file src="src/ios/libs/HappyDNS/Common/QNRecord.h" />
 		<header-file src="src/ios/libs/HappyDNS/Common/QNResolverDelegate.h" />
-
 		<header-file src="src/ios/libs/HappyDNS/Http/QNDnspodEnterprise.h" />
 		<header-file src="src/ios/libs/HappyDNS/Http/QNDnspodFree.h" />
-
 		<header-file src="src/ios/libs/HappyDNS/Local/QNHijackingDetectWrapper.h" />
 		<header-file src="src/ios/libs/HappyDNS/Local/QNHosts.h" />
 		<header-file src="src/ios/libs/HappyDNS/Local/QNResolver.h" />
 		<header-file src="src/ios/libs/HappyDNS/Local/QNResolvUtil.h" />
 		<header-file src="src/ios/libs/HappyDNS/Local/QNTxtResolver.h" />
-
 		<header-file src="src/ios/libs/HappyDNS/Util/QNDes.h" />
 		<header-file src="src/ios/libs/HappyDNS/Util/QNGetAddrInfo.h" />
 		<header-file src="src/ios/libs/HappyDNS/Util/QNHex.h" />
 		<header-file src="src/ios/libs/HappyDNS/Util/QNIP.h" />
-
-
 	</platform>
 </plugin>
 
