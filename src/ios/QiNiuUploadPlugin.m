@@ -4,7 +4,7 @@
 
 @property (copy, nonatomic)NSString *token;
 @property (copy) NSString *callbackId;
-@property (nonatomic) BOOL *flag;
+// @property (nonatomic) BOOL *flag;
 @property (copy) QNConfiguration *config;
 
 @end
@@ -36,9 +36,9 @@
 }
 
 
-- (void)cancel:(CDVInvokedUrlCommand *)command{
-    self.flag = true;
-}
+//- (void)cancel:(CDVInvokedUrlCommand *)command{
+//    self.flag = true;
+//}
 
 
 // 简单文件上传
@@ -67,9 +67,11 @@
     }
                                                                  params:nil
                                                                checkCrc:NO
-                                                     cancellationSignal:^() {
-       return self.flag;
-    }];
+                                                     cancellationSignal:nil
+                                                  //   cancellationSignal:^() {
+       // return self.flag;
+  //  }
+                                    ];
 
     // 上传管理器
     QNUploadManager *upManager = [[QNUploadManager alloc] initWithConfiguration:self.config];
