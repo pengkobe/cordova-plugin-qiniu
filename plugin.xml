@@ -35,8 +35,8 @@
 		<framework src="libz.dylib"/>
 		<framework src="libresolv.dylib"/>
 		<!--source code -->
-		<header-file src="src/ios/QiNiuUploadPlugin.h" />
-		<source-file src="src/ios/QiNiuUploadPlugin.m" />
+		<header-file src="src/ios/CDVQiNiuUploadPlugin.h" />
+		<source-file src="src/ios/CDVQiNiuUploadPlugin.m" />
 		<source-file src="src/ios/libs/libQiniuSDK_iOS.a" framework="true" />
 		<source-file src="src/ios/libs/libHappyDNS.a" framework="true" />
 		<header-file src="src/ios/libs/QiniuSDK.h" />
