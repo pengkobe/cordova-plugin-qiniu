@@ -53,12 +53,13 @@
 
     // 获取参数
     NSString * token = self.token;
-    NSString * key = [options objectForKey:@"key"];
+    NSString * key = [options objectForKey:@"name"];
     NSString * filePath = [options objectForKey:@"filePath"];
 
     // 上传进度更新
     QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithMime:nil progressHandler:^(NSString *key, float percent) {
         NSLog(@"percent == %.2f", percent);
+        key = key != nil ? key : @"";
         [result setObject:key forKey:@"key"];
         [result setObject:[NSNumber numberWithFloat:percent] forKey:@"percent"];
         // 回传进度
@@ -79,6 +80,9 @@
         if(info.ok)
         {
             NSLog(@"请求成功");
+            key = key != nil ? key : @"";
+            info = info != nil ? info : @"";
+            resp = resp != nil ? resp : @"";
             [result setObject:key forKey:@"key"];
             [result setObject:info forKey:@"info"];
             [result setObject:resp forKey:@"resp"];
@@ -88,6 +92,9 @@
         }
         else{
             NSLog(@"失败");
+            key = key != nil ? key : @"";
+            info = info != nil ? info : @"";
+            resp = resp != nil ? resp : @"";
             [result setObject:key forKey:@"key"];
             [result setObject:info forKey:@"info"];
             [result setObject:resp forKey:@"resp"];
