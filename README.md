@@ -23,7 +23,7 @@ cordova plugin add path/to/cordova-plugin-qiniu
 
 ## Usage
 #### Init
-```javascrit
+```javascript
 window.plugins.QiNiuUploadPlugin.init(uploadtoken,function(data){
 // success
 }, function(err){
@@ -32,7 +32,7 @@ window.plugins.QiNiuUploadPlugin.init(uploadtoken,function(data){
 ```
 
 #### Simple Upload
-```javascrit
+```javascript 
 window.plugins.QiNiuUploadPlugin.simpleUploadFile({
   filePath:'your_local_file_path',
   name: 'your_file_name'
@@ -42,8 +42,8 @@ window.plugins.QiNiuUploadPlugin.simpleUploadFile({
 // error
 });
 ```
-#### Cancell
-```javascrit
+#### Cancel
+```javascript
 window.plugins.QiNiuUploadPlugin.cancel(uploadtoken,function(data){
 // success
 }, function(err){

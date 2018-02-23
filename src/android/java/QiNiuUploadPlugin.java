@@ -129,7 +129,7 @@ public class QiNiuUploadPlugin extends CordovaPlugin {
     /**
      * 点击取消按钮，让UpCancellationSignal##isCancelled()方法返回true，以停止上传
      */
-    public void cancell(JSONArray args) throws JSONException, UnsupportedEncodingException {
+    public void cancel(JSONArray args) throws JSONException, UnsupportedEncodingException {
         isCancelled = true;
     }
 

@@ -25,13 +25,13 @@ QiNiuUploadPlugin.prototype.init = function(
   ]);
 };
 
-QiNiuUploadPlugin.prototype.cancell = function(cancell, errorCallback) {
+QiNiuUploadPlugin.prototype.cancel = function(cancel, errorCallback) {
   cordova.exec(
     successCallback,
     errorCallback,
     'QiNiuUploadPlugin',
-    'cancell',
-    [cancell]
+    'cancel',
+    [cancel]
   );
 };
 
