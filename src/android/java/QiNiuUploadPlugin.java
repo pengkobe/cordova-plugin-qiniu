@@ -8,6 +8,7 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
+import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +22,7 @@ import com.qiniu.android.storage.Configuration;
 import com.qiniu.android.common.AutoZone;
 import com.qiniu.android.storage.UpProgressHandler;
 import com.qiniu.android.storage.UpCancellationSignal;
+
 
 import java.net.URLDecoder;
 
@@ -72,6 +74,7 @@ public class QiNiuUploadPlugin extends CordovaPlugin {
     public void init(JSONArray args) throws JSONException, UnsupportedEncodingException {
         String uploadToken = args.getString(0);
         this.UPLOAD_TOKEN = uploadToken;
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "init succeed!"));
     }
 
     public void simpleUploadFile(JSONArray args) throws JSONException, UnsupportedEncodingException {
@@ -89,7 +92,9 @@ public class QiNiuUploadPlugin extends CordovaPlugin {
                             jsonObject.put("key", key);
                             jsonObject.put("percent", percent);
                             // 更新上传进度
-                            callbackContext.success(jsonObject);
+                            PluginResult progressResult = new PluginResult(PluginResult.Status.OK, jsonObject);
+                            progressResult.setKeepCallback(true);
+                            callbackContext.sendPluginResult(progressResult);
                         } catch (JSONException err) {
                         }
                     }
@@ -106,15 +111,16 @@ public class QiNiuUploadPlugin extends CordovaPlugin {
                         try {
                             JSONObject jsonObject = new JSONObject();
                             jsonObject.put("key", key);
-                            jsonObject.put("info", info);
                             jsonObject.put("res", res);
                             //res包含 hash、key 等信息，具体字段取决于上传策略的设置
                             if (info.isOK()) {
                                 Log.i("qiniu", "Upload Success");
-                                callbackContext.success(jsonObject);
+                                jsonObject.put("info", info);
+                                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, jsonObject));
                             } else {
                                 Log.i("qiniu", "Upload Fail");
-                                callbackContext.error(jsonObject);
+                                jsonObject.put("info", info.error);
+                                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, jsonObject));
                             }
                             Log.i("qiniu", key + ",\r\n " + info + ",\r\n " + res);
                         } catch (JSONException err) {

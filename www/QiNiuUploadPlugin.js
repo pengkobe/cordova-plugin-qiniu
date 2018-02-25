@@ -4,15 +4,23 @@ var QiNiuUploadPlugin = function() {};
 QiNiuUploadPlugin.prototype.simpleUploadFile = function(
   args,
   successCallback,
+  onProgressCallback,
   errorCallback
 ) {
-  cordova.exec(
-    successCallback,
-    errorCallback,
-    'QiNiuUploadPlugin',
-    'simpleUploadFile',
-    [args]
-  );
+  var win = function(result) {
+    if (typeof result.percent != 'undefined') {
+      if (self.onprogress) {
+        onProgressCallback(result);
+      }
+    } else {
+      if (successCallback) {
+        successCallback(result);
+      }
+    }
+  };
+  cordova.exec(win, errorCallback, 'QiNiuUploadPlugin', 'simpleUploadFile', [
+    args,
+  ]);
 };
 
 QiNiuUploadPlugin.prototype.init = function(
@@ -26,13 +34,9 @@ QiNiuUploadPlugin.prototype.init = function(
 };
 
 QiNiuUploadPlugin.prototype.cancel = function(cancel, errorCallback) {
-  cordova.exec(
-    successCallback,
-    errorCallback,
-    'QiNiuUploadPlugin',
-    'cancel',
-    [cancel]
-  );
+  cordova.exec(successCallback, errorCallback, 'QiNiuUploadPlugin', 'cancel', [
+    cancel,
+  ]);
 };
 
 if (!window.plugins) {
