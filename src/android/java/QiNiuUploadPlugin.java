@@ -78,57 +78,67 @@ public class QiNiuUploadPlugin extends CordovaPlugin {
     }
 
     public void simpleUploadFile(JSONArray args) throws JSONException, UnsupportedEncodingException {
-        String data = args.optJSONObject(0).getString("filePath");
-        String name = args.optJSONObject(0).getString("name");
-        data = URLDecoder.decode(data, "UTF-8"); //文件路径解码
-        data = data.replace("file://", ""); //去掉 file:// 路径。
+        final String UPLOAD_TOKEN = this.UPLOAD_TOKEN;
+        String filePath = args.optJSONObject(0).getString("filePath");
+        final String name = args.optJSONObject(0).getString("name");
+        filePath = URLDecoder.decode(filePath, "UTF-8"); //文件路径解码
+        filePath = filePath.replace("file://", ""); //去掉 file:// 路径。
+        final String data = filePath;
+
         Log.i("UploadFile filePath", data);
-        UploadOptions uploadOptions = new UploadOptions(null, null, false,
-                new UpProgressHandler() {
-                    @Override
-                    public void progress(String key, double percent) {
-                        try {
-                            JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("key", key);
-                            jsonObject.put("percent", percent);
-                            // 更新上传进度
-                            PluginResult progressResult = new PluginResult(PluginResult.Status.OK, jsonObject);
-                            progressResult.setKeepCallback(true);
-                            callbackContext.sendPluginResult(progressResult);
-                        } catch (JSONException err) {
-                        }
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                UploadOptions uploadOptions = new UploadOptions(null, null, false,
+                        new UpProgressHandler() {
+                            @Override
+                            public void progress(String key, double percent) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject();
+                                    jsonObject.put("key", key);
+                                    jsonObject.put("percent", percent);
+                                    // 更新上传进度
+                                    PluginResult progressResult = new PluginResult(PluginResult.Status.OK, jsonObject);
+                                    progressResult.setKeepCallback(true);
+                                    callbackContext.sendPluginResult(progressResult);
+                                } catch (JSONException err) {
+                                }
+                            }
+                        }, new UpCancellationSignal() {
+                    public boolean isCancelled() {
+                        return isCancelled;
                     }
-                }, new UpCancellationSignal() {
-            public boolean isCancelled() {
-                return isCancelled;
+                });
+                Log.i("UPLOAD_TOKEN", UPLOAD_TOKEN);
+                uploadManager.put(data, name, UPLOAD_TOKEN,
+                        new UpCompletionHandler() {
+                            @Override
+                            public void complete(String key, ResponseInfo info, JSONObject res) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject();
+                                    jsonObject.put("key", key);
+                                    jsonObject.put("res", res);
+                                    //res包含 hash、key 等信息，具体字段取决于上传策略的设置
+                                    if (info.isOK()) {
+                                        Log.i("qiniu", "Upload Success");
+                                        jsonObject.put("info", info);
+                                        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, jsonObject));
+                                    } else {
+                                        Log.i("qiniu", "Upload Fail");
+                                        jsonObject.put("info", info.error);
+                                        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, jsonObject));
+                                    }
+                                    Log.i("qiniu", key + ",\r\n " + info + ",\r\n " + res);
+                                } catch (JSONException err) {
+                                }
+                            }
+                        },
+                        uploadOptions
+                );
+
             }
         });
-        Log.i("UPLOAD_TOKEN", this.UPLOAD_TOKEN);
-        uploadManager.put(data, name, this.UPLOAD_TOKEN,
-                new UpCompletionHandler() {
-                    @Override
-                    public void complete(String key, ResponseInfo info, JSONObject res) {
-                        try {
-                            JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("key", key);
-                            jsonObject.put("res", res);
-                            //res包含 hash、key 等信息，具体字段取决于上传策略的设置
-                            if (info.isOK()) {
-                                Log.i("qiniu", "Upload Success");
-                                jsonObject.put("info", info);
-                                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, jsonObject));
-                            } else {
-                                Log.i("qiniu", "Upload Fail");
-                                jsonObject.put("info", info.error);
-                                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, jsonObject));
-                            }
-                            Log.i("qiniu", key + ",\r\n " + info + ",\r\n " + res);
-                        } catch (JSONException err) {
-                        }
-                    }
-                },
-                uploadOptions
-        );
+
+
     }
 
 
@@ -139,5 +149,5 @@ public class QiNiuUploadPlugin extends CordovaPlugin {
         isCancelled = true;
     }
 
-    // 记录断点 ( TODO )
+    // 记录断点 ( TODO ) 
 }
