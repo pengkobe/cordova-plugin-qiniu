@@ -4,10 +4,7 @@
 cordova plugin for qiniu sdk. android and ios both supported
 
 ## Install
-npm installation
-```shell
-cordova plugin add cordova-plugin-qiniu
-```
+
 github url installation
 ```shell
 cordova plugin add https://github.com/pengkobe/cordova-plugin-qiniu 
