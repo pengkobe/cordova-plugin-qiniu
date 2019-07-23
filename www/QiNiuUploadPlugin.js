@@ -9,9 +9,7 @@ QiNiuUploadPlugin.prototype.simpleUploadFile = function(
 ) {
   var win = function(result) {
     if (typeof result.percent != 'undefined') {
-      if (self.onprogress) {
         onProgressCallback(result);
-      }
     } else {
       if (successCallback) {
         successCallback(result);
