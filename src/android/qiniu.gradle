@@ -1,0 +1,11 @@
+repositories{
+  jcenter()
+}
+
+dependencies {
+   compile 'com.qiniu:qiniu-android-sdk:7.3.15'
+}
+
+android {
+
+}

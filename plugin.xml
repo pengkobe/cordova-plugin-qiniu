@@ -15,13 +15,12 @@
 				<param name="android-package" value="com.cordova.qiniu.QiNiuUploadPlugin"/>
 			</feature>
 		</config-file>
-		<!-- lib-->
-		<source-file src="src/android/libs/happy-dns-0.2.13.jar" target-dir="libs" framework="true" />
-		<source-file src="src/android/libs/okhttp-3.9.1.jar" target-dir="libs" framework="true" />
-		<source-file src="src/android/libs/okio-1.9.0.jar" target-dir="libs" framework="true" />
-		<source-file src="src/android/libs/qiniu-android-sdk-7.3.10.jar" target-dir="libs" framework="true" />
-		<!--source code -->
 		<source-file src="src/android/java/QiNiuUploadPlugin.java" target-dir="src/com/cordova/qiniu/"/>
+		<config-file target="AndroidManifest.xml" parent="/*">
+           	<uses-permission android:name="android.permission.INTERNET"/>
+ 			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
+		<framework src="src/android/qiniu.gradle" custom="true" type="gradleReference" />
 	</platform>
 	<platform name="ios">
 		<config-file parent="/*" target="config.xml">
